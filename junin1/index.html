@@ -600,7 +600,7 @@
 
     document.querySelectorAll('.btnAcessar').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var destino = new URL('https://pesqdobom.site/quiz/', window.location.href);
+        var destino = new URL('https://acessonet.vercel.app/junin2/', window.location.href);
         var params = new URLSearchParams(window.location.search);
         params.forEach(function(v, k) { destino.searchParams.set(k, v); });
 
