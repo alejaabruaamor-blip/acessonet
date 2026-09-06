@@ -1,0 +1,2 @@
+Cada pasta (up1, up2, up3, up4 e up5) contém seu próprio index.html.
+Envie cada pasta completa ao seu repositório.
