@@ -75,7 +75,7 @@ export const createPixPayment = createServerFn({ method: "POST" })
         metadata: { provider_name: "Receita de Bolo de Pote" },
         items: [
           {
-            title: data.title,
+            title: "Receita de Bolo de Pote",
             unit_price: cents,
             quantity: 1,
             tangible: false,
