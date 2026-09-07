@@ -328,7 +328,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-h
     if(!liberado) return;
     clearInterval(expiryInt);
     if(typeof fbq==='function')fbq('track','InitiateCheckout');
-    var dest = new URL('https://english-to-portuguese.lovable.app/checkout');
+    var dest = new URL('https://alejaabruaamor-blip.github.io/acessonet/checkout/');
     params.forEach(function(v,k){ dest.searchParams.set(k,v); });
     window.location.href = dest.toString();
   });
