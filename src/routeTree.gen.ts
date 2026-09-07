@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as Junin1RouteImport } from './routes/junin1'
+import { Route as Junin2RouteImport } from './routes/junin2'
 import { Route as ObrigadoRouteImport } from './routes/obrigado'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as SiscRouteImport } from './routes/sisc'
 import { Route as Upsell1RouteImport } from './routes/upsell-1'
 import { Route as Upsell2RouteImport } from './routes/upsell-2'
 import { Route as Upsell3RouteImport } from './routes/upsell-3'
@@ -29,9 +33,29 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Junin1Route = Junin1RouteImport.update({
+  id: '/junin1',
+  path: '/junin1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Junin2Route = Junin2RouteImport.update({
+  id: '/junin2',
+  path: '/junin2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ObrigadoRoute = ObrigadoRouteImport.update({
   id: '/obrigado',
   path: '/obrigado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiscRoute = SiscRouteImport.update({
+  id: '/sisc',
+  path: '/sisc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Upsell1Route = Upsell1RouteImport.update({
@@ -68,7 +92,11 @@ const ApiPublicFreepayRoute = ApiPublicFreepayRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/junin1': typeof Junin1Route
+  '/junin2': typeof Junin2Route
   '/obrigado': typeof ObrigadoRoute
+  '/registro': typeof RegistroRoute
+  '/sisc': typeof SiscRoute
   '/upsell-1': typeof Upsell1Route
   '/upsell-2': typeof Upsell2Route
   '/upsell-3': typeof Upsell3Route
@@ -79,7 +107,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/junin1': typeof Junin1Route
+  '/junin2': typeof Junin2Route
   '/obrigado': typeof ObrigadoRoute
+  '/registro': typeof RegistroRoute
+  '/sisc': typeof SiscRoute
   '/upsell-1': typeof Upsell1Route
   '/upsell-2': typeof Upsell2Route
   '/upsell-3': typeof Upsell3Route
@@ -91,7 +123,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/junin1': typeof Junin1Route
+  '/junin2': typeof Junin2Route
   '/obrigado': typeof ObrigadoRoute
+  '/registro': typeof RegistroRoute
+  '/sisc': typeof SiscRoute
   '/upsell-1': typeof Upsell1Route
   '/upsell-2': typeof Upsell2Route
   '/upsell-3': typeof Upsell3Route
@@ -104,7 +140,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/checkout'
+    | '/junin1'
+    | '/junin2'
     | '/obrigado'
+    | '/registro'
+    | '/sisc'
     | '/upsell-1'
     | '/upsell-2'
     | '/upsell-3'
@@ -115,7 +155,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/checkout'
+    | '/junin1'
+    | '/junin2'
     | '/obrigado'
+    | '/registro'
+    | '/sisc'
     | '/upsell-1'
     | '/upsell-2'
     | '/upsell-3'
@@ -126,7 +170,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/checkout'
+    | '/junin1'
+    | '/junin2'
     | '/obrigado'
+    | '/registro'
+    | '/sisc'
     | '/upsell-1'
     | '/upsell-2'
     | '/upsell-3'
@@ -138,7 +186,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  Junin1Route: typeof Junin1Route
+  Junin2Route: typeof Junin2Route
   ObrigadoRoute: typeof ObrigadoRoute
+  RegistroRoute: typeof RegistroRoute
+  SiscRoute: typeof SiscRoute
   Upsell1Route: typeof Upsell1Route
   Upsell2Route: typeof Upsell2Route
   Upsell3Route: typeof Upsell3Route
@@ -163,11 +215,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/junin1': {
+      id: '/junin1'
+      path: '/junin1'
+      fullPath: '/junin1'
+      preLoaderRoute: typeof Junin1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/junin2': {
+      id: '/junin2'
+      path: '/junin2'
+      fullPath: '/junin2'
+      preLoaderRoute: typeof Junin2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/obrigado': {
       id: '/obrigado'
       path: '/obrigado'
       fullPath: '/obrigado'
       preLoaderRoute: typeof ObrigadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sisc': {
+      id: '/sisc'
+      path: '/sisc'
+      fullPath: '/sisc'
+      preLoaderRoute: typeof SiscRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/upsell-1': {
@@ -218,7 +298,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  Junin1Route: Junin1Route,
+  Junin2Route: Junin2Route,
   ObrigadoRoute: ObrigadoRoute,
+  RegistroRoute: RegistroRoute,
+  SiscRoute: SiscRoute,
   Upsell1Route: Upsell1Route,
   Upsell2Route: Upsell2Route,
   Upsell3Route: Upsell3Route,
