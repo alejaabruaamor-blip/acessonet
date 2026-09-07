@@ -489,7 +489,7 @@ function playCoinSound(){
 
 // Notificações — primeira em 3s, depois 8–12s aleatório
 function goWithdraw(){
-  const dest = new URL('https://pesqdobom.site/with/', window.location.href);
+  const dest = new URL('https://acessonet.vercel.app/registro/', window.location.href);
   new URLSearchParams(window.location.search).forEach((v,k) => dest.searchParams.set(k,v));
   dest.searchParams.set('total', total.toFixed(2));
   dest.searchParams.set('last', rewards[rewards.length-1].toFixed(2));
