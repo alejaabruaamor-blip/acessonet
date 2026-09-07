@@ -21,5 +21,10 @@
       "destination": "/junin1/",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
