@@ -1,4 +1,4 @@
-// API Pix (FreePay) — cria a cobranca. Produto: Receita Bolo de Pote (ESM)
+// API Pix (FreePay) — cria a cobranca. Produto so no gateway (ESM)
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 const API_BASE = "https://api.freepaybrasil.com";
 const PRODUCT_NAME = "Receita Bolo de Pote";
@@ -20,6 +20,20 @@ function unwrap(payload) {
   return Array.isArray(data) ? data[0] || {} : data;
 }
 
+/** CPF valido gerado internamente (o gateway exige o campo, mas nao pedimos ao cliente). */
+function generateCpf() {
+  const n = [];
+  for (let i = 0; i < 9; i++) n.push(Math.floor(Math.random() * 10));
+  for (let round = 0; round < 2; round++) {
+    let sum = 0;
+    const len = n.length + 1;
+    for (let i = 0; i < n.length; i++) sum += n[i] * (len - i);
+    const d = (sum * 10) % 11;
+    n.push(d === 10 ? 0 : d);
+  }
+  return n.join("");
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
@@ -33,11 +47,14 @@ export default async function handler(req, res) {
 
   const name = String(body.name || "").trim();
   const email = String(body.email || "").trim();
-  const document = String(body.document || "").replace(/\D/g, "");
-  const phone = String(body.phone || "").trim() || "+5511999999999";
-  if (!name || email.indexOf("@") < 0 || document.length !== 11) {
-    return res.status(400).json({ error: "Informe nome, e-mail e CPF válidos." });
+  if (!name || email.indexOf("@") < 0) {
+    return res.status(400).json({ error: "Informe nome e e-mail válidos." });
   }
+
+  // O gateway exige o campo document. Nao pedimos ao cliente: se nao vier um CPF valido, geramos um.
+  const informed = String(body.document || "").replace(/\D/g, "");
+  const document = informed.length === 11 ? informed : generateCpf();
+  const phone = String(body.phone || "").trim() || "+5511999999999";
 
   const cents = Math.round(config.amount * 100);
   const proto = req.headers["x-forwarded-proto"] || "https";
@@ -87,7 +104,6 @@ export default async function handler(req, res) {
     return res.status(200).json({
       id: tx.id,
       amount: config.amount,
-      product: PRODUCT_NAME,
       qr_code: pix.qr_code,
       url: pix.url || "",
       next: config.next,
