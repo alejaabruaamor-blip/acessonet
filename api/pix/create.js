@@ -1,0 +1,98 @@
+// API Pix (FreePay) — cria a cobranca. Produto: Receita Bolo de Pote
+const API_BASE = "https://api.freepaybrasil.com";
+const PRODUCT_NAME = "Receita Bolo de Pote";
+const STEPS = {
+  checkout: { amount: 17.99, next: "../up1/" },
+  up1: { amount: 27.74, next: "../up2/" },
+  up3: { amount: 29.9, next: "../up4/" },
+};
+
+function auth() {
+  const pub = process.env.FREEPAY_PUBLIC_KEY || "";
+  const secret = process.env.FREEPAY_SECRET_KEY || "";
+  return "Basic " + Buffer.from(pub + ":" + secret).toString("base64");
+}
+
+function unwrap(payload) {
+  if (!payload) return {};
+  const data = payload.data || payload;
+  return Array.isArray(data) ? data[0] || {} : data;
+}
+
+module.exports = async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "content-type");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Método inválido" });
+
+  const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  const config = STEPS[body.step];
+  if (!config) return res.status(400).json({ error: "Etapa inválida" });
+
+  const name = String(body.name || "").trim();
+  const email = String(body.email || "").trim();
+  const document = String(body.document || "").replace(/\D/g, "");
+  const phone = String(body.phone || "").trim() || "+5511999999999";
+  if (!name || email.indexOf("@") < 0 || document.length !== 11) {
+    return res.status(400).json({ error: "Informe nome, e-mail e CPF válidos." });
+  }
+
+  const cents = Math.round(config.amount * 100);
+  const proto = req.headers["x-forwarded-proto"] || "https";
+  const origin = proto + "://" + req.headers.host;
+
+  const payload = {
+    amount: cents,
+    payment_method: "pix",
+    postback_url: origin + "/api/pix/webhook",
+    customer: {
+      name: name,
+      email: email,
+      document: { number: document, type: "cpf" },
+      phone: phone,
+    },
+    items: [
+      {
+        title: PRODUCT_NAME,
+        unit_price: cents,
+        quantity: 1,
+        tangible: false,
+        external_ref: "receita-bolo-de-pote",
+      },
+    ],
+    pix: { expires_in_days: 1 },
+    metadata: { product: PRODUCT_NAME, step: body.step },
+  };
+
+  try {
+    const r = await fetch(API_BASE + "/v1/payment-transaction/create", {
+      method: "POST",
+      headers: { authorization: auth(), "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const text = await r.text();
+    if (!r.ok) {
+      console.error("FreePay create failed", r.status, text.slice(0, 500));
+      return res.status(502).json({ error: "Não foi possível gerar o Pix. Tente novamente." });
+    }
+    const tx = unwrap(JSON.parse(text));
+    const pixRaw = Array.isArray(tx.pix) ? tx.pix[0] : tx.pix;
+    const pix = pixRaw || {};
+    if (!tx.id || !pix.qr_code) {
+      console.error("FreePay sem pix", text.slice(0, 500));
+      return res.status(502).json({ error: "O Pix não foi gerado. Tente novamente." });
+    }
+    return res.status(200).json({
+      id: tx.id,
+      amount: config.amount,
+      product: PRODUCT_NAME,
+      qr_code: pix.qr_code,
+      url: pix.url || "",
+      next: config.next,
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(502).json({ error: "Falha ao falar com o Pix. Tente novamente." });
+  }
+};
