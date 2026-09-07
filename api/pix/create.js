@@ -7,6 +7,8 @@ const STEPS = {
   up1: { amount: 27.74, next: "../up2/" },
   up2: { amount: 29.9, next: "../up3/" },
   up3: { amount: 29.9, next: "../up4/" },
+  up4: { amount: 28.97, next: "../up5/" },
+  up5: { amount: 37.9, next: "../obrigado/" },
 };
 
 function auth() {
