@@ -1,6 +1,6 @@
 /* Pix (FreePay) — checkout e upsells. Produto: Receita Bolo de Pote */
 (function () {
-  var API = window.location.origin + "/api/pix";
+  var API = "https://magic-play-helper.lovable.app/api/public/pix";
   var CSS =
     "#pixov{position:fixed;inset:0;background:rgba(15,23,42,.7);display:flex;align-items:center;justify-content:center;padding:16px;z-index:99999;font-family:Arial,Helvetica,sans-serif}" +
     "#pixbox{background:#fff;color:#15171a;border-radius:16px;max-width:400px;width:100%;padding:22px;text-align:center;max-height:92vh;overflow:auto}" +
