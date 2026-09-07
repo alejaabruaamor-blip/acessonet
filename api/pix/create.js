@@ -1,4 +1,4 @@
-// API Pix (FreePay) — cria a cobranca. Produto: Receita Bolo de Pote
+// API Pix (FreePay) — cria a cobranca. Produto: Receita Bolo de Pote (ESM)
 const API_BASE = "https://api.freepaybrasil.com";
 const PRODUCT_NAME = "Receita Bolo de Pote";
 const STEPS = {
@@ -19,7 +19,7 @@ function unwrap(payload) {
   return Array.isArray(data) ? data[0] || {} : data;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
@@ -95,4 +95,4 @@ module.exports = async function handler(req, res) {
     console.error(e);
     return res.status(502).json({ error: "Falha ao falar com o Pix. Tente novamente." });
   }
-};
+}
