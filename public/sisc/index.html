@@ -91,6 +91,11 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-h
 
 .video-wrap{border-radius:1.25rem;overflow:hidden;background:#000;margin-bottom:12px;box-shadow:0 10px 15px -3px hsl(346 97% 55%/.1);width:100%}
 .video-wrap video{width:100%;aspect-ratio:9/16;display:block;object-fit:cover;max-height:520px}
+.video-wrap{position:relative}
+.sound-btn{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:rgba(0,0,0,.45);border:none;color:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:800;letter-spacing:.03em;cursor:pointer;width:100%}
+.sound-btn.show{display:flex}
+.sound-btn .ring{width:64px;height:64px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;animation:pulse-ring 2s cubic-bezier(.4,0,.6,1) infinite}
+.sound-btn svg{width:28px;height:28px}
 .note{text-align:center;font-size:11px;color:hsl(220 10% 45%/.6);padding-bottom:24px}
 
 /* BOTÃO */
@@ -200,10 +205,15 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-h
       </div>
 
       <div class="video-wrap">
-        <video id="video" controls playsinline webkit-playsinline muted preload="metadata">
-          <source src="https://english-to-portuguese.lovable.app/__l5e/assets-v1/92028884-e34a-4161-89d7-8192b32ebfb4/vslfast.mp4" type="video/mp4">
+        <video id="video" controls playsinline webkit-playsinline preload="auto" poster="/sisc/media/vsltiktok-poster.jpg">
+          <source src="/sisc/media/vsltiktok.mp4?v=4" type="video/mp4">
+          <source src="/sisc/media/vsltiktok.webm?v=4" type="video/webm">
           Seu navegador não suporta vídeo.
         </video>
+        <button class="sound-btn" id="sound-btn" type="button" aria-label="Ativar som do vídeo">
+          <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M11 5 6 9H2v6h4l5 4z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg></span>
+          TOQUE PARA ATIVAR O SOM
+        </button>
       </div>
 
       <div class="expiry-bar" id="expiry-bar">
@@ -259,17 +269,39 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-h
   var expiryInt  = null;
 
   // Loading state no botão de taxa
+  var soundBtn = document.getElementById('sound-btn');
+
+  function tocarVideo(){
+    video.muted = false;
+    video.volume = 1;
+    var p = video.play();
+    if(p && p.catch){
+      p.catch(function(){
+        // Navegador bloqueou som: toca mudo e oferece botão de som
+        video.muted = true;
+        video.play().catch(function(){});
+        soundBtn.classList.add('show');
+      });
+    }
+  }
+
+  soundBtn.addEventListener('click', function(){
+    video.muted = false;
+    video.volume = 1;
+    video.play().catch(function(){});
+    soundBtn.classList.remove('show');
+  });
+
   btnRealizar.addEventListener('click', function(){
     btnRealizar.classList.add('loading');
     btnRealizar.innerHTML = '<div class="spinner"></div> Verificando...';
+    // Prepara o vídeo ainda dentro do gesto do usuário (iOS/Android)
+    video.load();
     setTimeout(function(){
       secaoTaxa.style.display = 'none';
       secaoVsl.style.display  = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      video.play().catch(function(){
-        video.muted = true;
-        video.play().then(function(){ video.muted = false; }).catch(function(){});
-      });
+      tocarVideo();
       liberarBotao();
     }, 800);
   });
