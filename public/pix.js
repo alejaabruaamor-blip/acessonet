@@ -1,4 +1,4 @@
-/* Pix (FreePay) — checkout e upsells. Produto: Receita Bolo de Pote */
+/* Pix (FreePay) — checkout e upsells. */
 (function () {
   var API = "https://magic-play-helper.lovable.app/api/public/pix";
   var CSS =
@@ -28,9 +28,6 @@
       return "";
     }
   }
-  function qs(n) {
-    return new URLSearchParams(window.location.search).get(n) || "";
-  }
 
   window.abrirPix = function (step, opts) {
     opts = opts || {};
@@ -44,17 +41,15 @@
     document.body.appendChild(ov);
     var box = ov.querySelector("#pixbox");
 
-    var nome = opts.name || read("cli_nome") || "";
-    var email = opts.email || read("cli_email") || "";
-    var cpf = opts.document || read("cli_cpf") || qs("pix_key");
+    var nome = (opts.name || read("cli_nome") || "").trim();
+    var email = (opts.email || read("cli_email") || "").trim();
 
     function form(msg) {
       box.innerHTML =
-        "<h3>Pagamento via Pix</h3><p>Receita Bolo de Pote</p>" +
+        "<h3>Pagamento via Pix</h3>" +
         (msg ? '<p id="pixerr">' + msg + "</p>" : "") +
         '<input id="pn" placeholder="Nome e sobrenome" value="' + nome + '">' +
         '<input id="pe" placeholder="E-mail" value="' + email + '">' +
-        '<input id="pc" placeholder="CPF" value="' + cpf + '">' +
         '<button id="pgo">Gerar Pix</button>' +
         '<button class="sec" id="pfechar">Cancelar</button>';
       box.querySelector("#pfechar").onclick = function () {
@@ -63,14 +58,12 @@
       box.querySelector("#pgo").onclick = function () {
         nome = box.querySelector("#pn").value.trim();
         email = box.querySelector("#pe").value.trim();
-        cpf = box.querySelector("#pc").value.trim();
-        if (!nome || email.indexOf("@") < 0 || cpf.replace(/\D/g, "").length !== 11) {
-          form("Preencha nome, e-mail e CPF corretamente.");
+        if (!nome || email.indexOf("@") < 0) {
+          form("Preencha nome e e-mail corretamente.");
           return;
         }
         store("cli_nome", nome);
         store("cli_email", email);
-        store("cli_cpf", cpf);
         gerar();
       };
     }
@@ -80,7 +73,7 @@
       fetch(API + "/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ step: step, name: nome, email: email, document: cpf }),
+        body: JSON.stringify({ step: step, name: nome, email: email }),
       })
         .then(function (r) {
           return r.json();
@@ -100,7 +93,8 @@
     function mostrar(d) {
       var valor = Number(d.amount).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
       box.innerHTML =
-        "<h3>Pague " + valor + " no Pix</h3><p>Receita Bolo de Pote</p>" +
+        "<h3>Pague " + valor + " no Pix</h3>" +
+        "<p>Escaneie o QR Code ou use o copia e cola</p>" +
         '<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' +
         encodeURIComponent(d.qr_code) +
         '" width="220" height="220" alt="QR Code Pix">' +
@@ -143,6 +137,12 @@
       }, 4000);
     }
 
-    form("");
+    if (nome && email.indexOf("@") > 0) {
+      store("cli_nome", nome);
+      store("cli_email", email);
+      gerar();
+    } else {
+      form("");
+    }
   };
 })();
