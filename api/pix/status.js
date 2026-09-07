@@ -1,4 +1,4 @@
-// API Pix (FreePay) — consulta o status da cobranca
+// API Pix (FreePay) — consulta o status da cobranca (ESM)
 const API_BASE = "https://api.freepaybrasil.com";
 
 function auth() {
@@ -13,7 +13,7 @@ function unwrap(payload) {
   return Array.isArray(data) ? data[0] || {} : data;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
@@ -34,4 +34,4 @@ module.exports = async function handler(req, res) {
     console.error(e);
     return res.status(200).json({ status: "PENDING", paid: false });
   }
-};
+}
