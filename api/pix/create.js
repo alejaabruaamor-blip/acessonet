@@ -4,11 +4,11 @@ const API_BASE = "https://api.freepaybrasil.com";
 const PRODUCT_NAME = "Receita Bolo de Pote";
 const STEPS = {
   checkout: { amount: 17.99, next: "../up1/" },
-  up1: { amount: 27.74, next: "../up2/" },
-  up2: { amount: 29.9, next: "../up3/" },
-  up3: { amount: 29.9, next: "../up4/" },
-  up4: { amount: 28.97, next: "../up5/" },
-  up5: { amount: 37.9, next: "../obrigado/" },
+  up1: { amount: 19.99, next: "../up2/" },
+  up2: { amount: 21.99, next: "../up3/" },
+  up3: { amount: 14.99, next: "../up4/" },
+  up4: { amount: 14.99, next: "../up5/" },
+  up5: { amount: 37.99, next: "../obrigado/" },
 };
 
 function auth() {
