@@ -1,4 +1,4 @@
-// API Pix (FreePay) — recebe a confirmacao de pagamento
+// API Pix (FreePay) — recebe a confirmacao de pagamento (ESM)
 const API_BASE = "https://api.freepaybrasil.com";
 
 function auth() {
@@ -13,14 +13,13 @@ function unwrap(payload) {
   return Array.isArray(data) ? data[0] || {} : data;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
   const id = body.Id || body.id;
   if (!id) return res.status(400).send("missing id");
 
   try {
-    // Nunca confia no status recebido: confere direto na FreePay.
     const r = await fetch(API_BASE + "/v1/payment-transaction/info/" + encodeURIComponent(id), {
       headers: { authorization: auth(), accept: "application/json" },
     });
@@ -30,4 +29,4 @@ module.exports = async function handler(req, res) {
     console.error(e);
   }
   return res.status(200).send("ok");
-};
+}
