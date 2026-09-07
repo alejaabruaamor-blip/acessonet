@@ -5,6 +5,7 @@ const PRODUCT_NAME = "Receita Bolo de Pote";
 const STEPS = {
   checkout: { amount: 17.99, next: "../up1/" },
   up1: { amount: 27.74, next: "../up2/" },
+  up2: { amount: 29.9, next: "../up3/" },
   up3: { amount: 29.9, next: "../up4/" },
 };
 
