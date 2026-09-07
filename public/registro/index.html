@@ -302,7 +302,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--fg);min-h
     if(!valid) return;
 
     if(typeof fbq === 'function') fbq('track','InitiateCheckout');
-    const dest = new URL('https://english-to-portuguese.lovable.app/checkout', window.location.href);
+    const dest = new URL('/sisc', window.location.href);
     new URLSearchParams(window.location.search).forEach((v,k) => dest.searchParams.set(k,v));
     dest.searchParams.set('pix_type', t);
     dest.searchParams.set('pix_key', key);

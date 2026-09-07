@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
-    throw redirect({ to: "/checkout" });
+    throw redirect({ href: "/junin1" });
   },
   head: () => ({
     meta: [
