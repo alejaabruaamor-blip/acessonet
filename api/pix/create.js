@@ -1,4 +1,5 @@
 // API Pix (FreePay) — cria a cobranca. Produto: Receita Bolo de Pote (ESM)
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 const API_BASE = "https://api.freepaybrasil.com";
 const PRODUCT_NAME = "Receita Bolo de Pote";
 const STEPS = {
@@ -68,7 +69,7 @@ export default async function handler(req, res) {
   try {
     const r = await fetch(API_BASE + "/v1/payment-transaction/create", {
       method: "POST",
-      headers: { authorization: auth(), "content-type": "application/json", accept: "application/json" },
+      headers: { authorization: auth(), "content-type": "application/json", accept: "application/json", "user-agent": UA },
       body: JSON.stringify(payload),
     });
     const text = await r.text();
