@@ -1,6 +1,6 @@
 /* Pix (FreePay) — checkout e upsells. Produto: Receita Bolo de Pote */
 (function () {
-  var API = window.location.origin;
+  var API = "https://magic-play-helper.lovable.app/api/public/pix";
   var CSS =
     "#pixov{position:fixed;inset:0;background:rgba(15,23,42,.7);display:flex;align-items:center;justify-content:center;padding:16px;z-index:99999;font-family:Arial,Helvetica,sans-serif}" +
     "#pixbox{background:#fff;color:#15171a;border-radius:16px;max-width:400px;width:100%;padding:22px;text-align:center;max-height:92vh;overflow:auto}" +
@@ -77,7 +77,7 @@
 
     function gerar() {
       box.innerHTML = "<h3>Gerando seu Pix...</h3><p>Aguarde um instante</p>";
-      fetch(API + "/api/pix/create", {
+      fetch(API + "/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ step: step, name: nome, email: email, document: cpf }),
@@ -124,7 +124,7 @@
         box.querySelector("#pcopy").textContent = "Código copiado!";
       };
       var timer = setInterval(function () {
-        fetch(API + "/api/pix/status?id=" + encodeURIComponent(d.id))
+        fetch(API + "/status?id=" + encodeURIComponent(d.id))
           .then(function (r) {
             return r.json();
           })
