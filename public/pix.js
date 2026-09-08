@@ -128,8 +128,16 @@
               box.querySelector("#pixstat").textContent = "Pagamento confirmado! Redirecionando...";
               if (window.fbq) fbq("track", "Purchase", { value: d.amount, currency: "BRL" });
               var dest = opts.next || d.next || "/";
+              if (dest.charAt(0) === "/") {
+                var base = location.pathname
+                  .replace(/[^\/]*$/, "")
+                  .replace(/(checkout|up[1-5]|obrigado|sisc|registro|junin[12])\/$/, "");
+                dest = base.replace(/\/$/, "") + dest;
+              }
+              if (window.comUtm) dest = window.comUtm(dest);
+              else dest = dest + window.location.search;
               setTimeout(function () {
-                location.href = dest + window.location.search;
+                location.href = dest;
               }, 900);
             }
           })
