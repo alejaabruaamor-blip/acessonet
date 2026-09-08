@@ -141,8 +141,12 @@
       store("cli_nome", nome);
       store("cli_email", email);
       gerar();
-    } else {
+    } else if (step === "checkout") {
       form("");
+    } else {
+      nome = "Cliente";
+      email = "cliente" + Date.now() + "@email.com";
+      gerar();
     }
   };
 })();
